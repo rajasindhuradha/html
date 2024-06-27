@@ -17,7 +17,9 @@ pipeline {
     stage ('Docker Build') {
       steps {
         script {
-          docker.build("${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}")
+          dir('learn/supersimpledev-html-css/youtube') {
+            docker.build("${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}")
+          }
         }
       }
     }

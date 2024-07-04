@@ -39,6 +39,24 @@ pipeline {
         }
       }
     }
+    stage ('Publish Version') {
+      steps {
+        script {
+          git credentials:'github-credentials', url:'https://github.com/rajasindhuradha/application-version.git'
+
+          sh """
+            cd applications-version
+            ls -l
+          """
+
+          git config user.email "https://github.com/rajasindhuradha"
+          git config user.name "rajasindhuradha"
+          git add .
+          git commit -m "Automated commit message"
+          git push https://rajasindhuradha:${GIT_TOKEN}@github.com/rajasindhuradha/applications-version.git
+        }
+      }
+    }
     stage ('Trigger deployment') {
       steps {
         build wait: false, job: 'deploy',  parameters: [string(name: 'IMAGE_TAG', value: "${IMAGE_TAG}")]

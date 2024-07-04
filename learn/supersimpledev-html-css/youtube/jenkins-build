@@ -12,6 +12,7 @@ pipeline {
     IMAGE_NAME = "youtube"
     IMAGE_TAG = "1.${BUILD_NUMBER}"
     DOCKER_CREDENTIAL_ID = "jfrog-credential"
+    GIT_TOKEN = "github-credentials"
   }
   stages {
     stage ('Docker Build') {
